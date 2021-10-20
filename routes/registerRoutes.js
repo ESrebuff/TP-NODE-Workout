@@ -4,7 +4,7 @@ import {WorkoutUser} from '../models/WorkoutUser.js'
 
 // bcrypt recommanded
 const saltRounds = 10;
-const someOtherPlaintextPassword = 'not_bacon';
+const secret = '$2b$10$SZ438uYpkz1k2DvUN7U5I.XjcM4ESIke1iK/0OkOJ9X39MA3MatGS';
 
 const router = express.Router()
 
@@ -22,8 +22,7 @@ router.post('/register', async(req, res) => {
             mail: req.body.mail
         })
         if (!getUserByPseudo && !getUserByMail) {
-            bcrypt.genSalt(saltRounds, function(err, salt) {
-                bcrypt.hash(myPlaintextPassword, salt, function(err, hash) {
+                    const hash = bcrypt.hashSync(req.body.pdw, saltRounds)
                     const newUser = new WorkoutUser({
                         pseudo: req.body.pseudo,
                         mail: req.body.mail,
@@ -35,8 +34,6 @@ router.post('/register', async(req, res) => {
                         console.log("Vous avez réussi à vous enregistrer")
                         res.render('connect')
                     })
-                })
-            })
 
         } else res.render('register', { user:'Votre email ou pseudo est déja utilisé' }) 
     } else res.render('register', { user:'Vos mot de passe doivent être identique' })
