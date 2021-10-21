@@ -1,6 +1,7 @@
 import {
     WorkoutObjectif
-} from '../models/WorkoutObjectif.js'
+}
+from '../models/WorkoutObjectif.js'
 export const add_objectif = async (req, res) => {
     const user = req.session.user
     if (user) {
@@ -10,25 +11,37 @@ export const add_objectif = async (req, res) => {
             const getObjectif = await WorkoutObjectif.findOne({
                 userAndExoId: IdFromExoAndUser
             })
-            if (!getObjectif) {
-                const objectif = new WorkoutObjectif({
-                    userAndExoId: IdFromExoAndUser,
-                    nameExos: req.body.exoName,
-                    pseudo: user.pseudo,
-                    mail: user.mail,
-                    roleUser: user.role,
+            if(getObjectif) {
+            const mdrrrr = WorkoutObjectif.findOneAndUpdate({userAndExoId : IdFromExoAndUser },
+                 { 
                     countRepMax: req.body.maxRep,
                     countRepOb: req.body.obRep,
                     weightLiftingMax: req.body.maxWeigth,
                     weightLiftingOb: req.body.obWeigth
-                }).save((err) => {
-                    if (err) {
+                }, (err, data) => {
+                    if(err) {
                         throw err;
-                    }
-                    console.log("Vous avez ajouter un objectif")
-                    res.redirect('/')
+                    } else res.redirect('/')
                 })
-            }
-        } else res.redirect('/')
+            } else {
+            const objectif = new WorkoutObjectif({
+                userAndExoId: IdFromExoAndUser,
+                nameExos: req.body.exoName,
+                pseudo: user.pseudo,
+                mail: user.mail,
+                roleUser: user.role,
+                countRepMax: req.body.maxRep,
+                countRepOb: req.body.obRep,
+                weightLiftingMax: req.body.maxWeigth,
+                weightLiftingOb: req.body.obWeigth
+            }).save((err) => {
+                if (err) {
+                    throw err;
+                }
+                console.log("Vous avez ajouté un objectif")
+                res.redirect('/')
+            })
+        }
+        }
     } else res.redirect('/')
 }

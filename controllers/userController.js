@@ -1,8 +1,5 @@
 import {WorkoutUser} from '../models/WorkoutUser.js'
 import bcrypt from 'bcrypt'
-// bcrypt recommanded
-const saltRounds = 10;
-const secret = '$2b$10$SZ438uYpkz1k2DvUN7U5I.XjcM4ESIke1iK/0OkOJ9X39MA3MatGS';
 
 export const set_account = async(req, res) => {
     if (req.body.pseudo && req.body.mail && req.body.pdw && req.body.pdwv) {
@@ -14,7 +11,7 @@ export const set_account = async(req, res) => {
             mail: req.body.mail
         })
         if (!getUserByPseudo && !getUserByMail) {
-                    const hash = bcrypt.hashSync(req.body.pdw, saltRounds)
+                    const hash = bcrypt.hashSync(req.body.pdw, 10)
                     const newUser = new WorkoutUser({
                         pseudo: req.body.pseudo,
                         mail: req.body.mail,
@@ -45,7 +42,7 @@ export const connect_account = async(req, res) => {
     } else if(userGetByPseudo) {
         user = userGetByPseudo
     } else res.render('connect', { user : 'Votre compte ou mot de passe est invalide', session : checkAuth(req, res) })
-
+    if(user) {
     bcrypt.compare(req.body.pdw, user.password, function(err, result) {
         if(err) throw err
         else if(result) {
@@ -55,6 +52,7 @@ export const connect_account = async(req, res) => {
             res.redirect('/')
         } else res.render('connect', { user : 'Votre compte ou mot de passe est invalide', session : checkAuth(req, res) })
     })
+    } else res.render('connect', { user : 'Votre compte ou mot de passe est invalide', session : checkAuth(req, res) })
 }
 
 function checkAuth(req, res) {

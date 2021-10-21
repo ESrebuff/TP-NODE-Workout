@@ -17,10 +17,7 @@ import session from 'express-session'
     }
 }())
 
-const expiryDate = ()=> {
-    return new Date( Date.now() + 60 * 60 * 1000 ); // 1 hour
-}
-const port = 3000
+const port = 80
 
 app.use(express.json())
 app.use(express.urlencoded({ extended: true }))
@@ -37,5 +34,5 @@ app.use(exoRoutes)
 app.use(redirectRoutes)
 
 app.listen(port, () => {
-    console.log(`Exemple app listening at http://localhost:${port}`)
+    console.log(`Exemple app listening at https://localhost:${port}`)
 })

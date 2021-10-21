@@ -9,4 +9,5 @@ router.post('/add-exo', set_exo)
 
 router.get('/single/:id', show_exo)
 router.post('/add-objectif/:id', add_objectif)
+
 export default router
