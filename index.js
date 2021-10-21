@@ -4,6 +4,7 @@ import mongoose from 'mongoose'
 import ejs from 'ejs'
 import userRoutes from './routes/userRoutes.js'
 import exoRoutes from './routes/exoRoutes.js'
+import redirectRoutes from './routes/redirectRoutes.js'
 import session from 'express-session'
 
 (async function () {
@@ -33,6 +34,7 @@ app.set('view engine', 'ejs')
 
 app.use(userRoutes)
 app.use(exoRoutes)
+app.use(redirectRoutes)
 
 app.listen(port, () => {
     console.log(`Exemple app listening at http://localhost:${port}`)
