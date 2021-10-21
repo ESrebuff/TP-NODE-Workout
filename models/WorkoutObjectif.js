@@ -6,9 +6,18 @@ const workoutObjectifSchema = new mongoose.Schema({
     pseudo: String,
     mail: String,
     roleUser: { type: Boolean, default: false },
-    countRep: { type: Number, default: 0 },
-    weightLifting: { type: Number, default: 0 },
+    countRepMax: { type: Number, default: 0 },
+    countRepOb: { type: Number, default: 0 },
+    weightLiftingMax: { type: Number, default: 0 },
+    weightLiftingOb: { type: Number, default: 0 },
     date: { type: Date, default: Date.now }
 })
 
 export const WorkoutObjectif = mongoose.model('WorkoutObjectif', workoutObjectifSchema)
+
+
+
+// maxWeigth
+// maxRep
+// obWeigth
+// obRep

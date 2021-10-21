@@ -24,7 +24,7 @@ export const set_account = async(req, res) => {
                             throw err;
                         }
                         console.log("Vous avez réussi à vous enregistrer")
-                        res.render('connect')
+                        res.redirect('connect')
                     })
 
         } else res.render('register', { user:'Votre email ou pseudo est déja utilisé' }) 
