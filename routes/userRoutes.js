@@ -40,4 +40,12 @@ router.post('/register', async(req, res) => {
     } else res.render('register', { user:'Vous devez remplir entièrement le formulaire' })
 })
 
+router.get('/connect', (req, res) => {
+    res.render('connect')
+})
+
+router.get('/connect/admin', (req, res) => {
+    res.render('connect-admin')
+})
+
 export default router

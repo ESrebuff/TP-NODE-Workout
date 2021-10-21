@@ -2,14 +2,13 @@ import express from 'express'
 const app = express()
 import mongoose from 'mongoose'
 import ejs from 'ejs'
-import formRoutes from './routes/formRoutes.js'
-import singleRoutes from './routes/singleRoutes.js'
-import connectRoutes from './routes/connectRoutes.js'
-import registerRoutes from './routes/registerRoutes.js'
+import userRoutes from './routes/userRoutes.js'
+import exoRoutes from './routes/exoRoutes.js'
+import session from 'express-session'
 
 (async function () {
     try {
-        await mongoose.connect('mongodb://localhost:27017/workoutdb', {
+        await mongoose.connect('mongodb+srv://test:test123@cluster0.rzxjh.mongodb.net/workoutdb?retryWrites=true&w=majority', {
             useNewUrlParser: true
         })
     } catch (error) {
@@ -25,16 +24,16 @@ const port = 3000
 app.use(express.json())
 app.use(express.urlencoded({ extended: true }))
 app.use(express.static('public'))
+app.use(session({
+    secret: 'secrey_key',
+    resave: false,
+    saveUninitialized: false
+}))
 app.set('view engine', 'ejs')
 
-app.get('/', (req, res) => {
-    res.render('index')
-})
+app.use(userRoutes)
+app.use(exoRoutes)
 
-app.use(formRoutes)
-app.use(singleRoutes)
-app.use(connectRoutes)
-app.use(registerRoutes)
 app.listen(port, () => {
     console.log(`Exemple app listening at http://localhost:${port}`)
 })
