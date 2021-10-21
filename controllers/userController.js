@@ -24,9 +24,9 @@ export const set_account = async(req, res) => {
                         res.redirect('connect')
                     })
 
-        } else res.render('register', { user:'Votre email ou pseudo est déja utilisé' }) 
-    } else res.render('register', { user:'Vos mot de passe doivent être identique' })
-    } else res.render('register', { user:'Vous devez remplir entièrement le formulaire' })
+        } else res.render('register', { user:'Votre email ou pseudo est déja utilisé', session : checkAuth(req, res) }) 
+    } else res.render('register', { user:'Vos mot de passe doivent être identique', session : checkAuth(req, res) })
+    } else res.render('register', { user:'Vous devez remplir entièrement le formulaire', session : checkAuth(req, res) })
 }
 
 export const connect_account = async(req, res) => {

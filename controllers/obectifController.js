@@ -21,7 +21,9 @@ export const add_objectif = async (req, res) => {
                 }, (err, data) => {
                     if(err) {
                         throw err;
-                    } else res.redirect('/')
+                    }
+                    console.log("Vous avez modifié votre objectif") 
+                    res.redirect('/')
                 })
             } else {
             const objectif = new WorkoutObjectif({
