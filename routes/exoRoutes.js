@@ -5,7 +5,6 @@ const router = express.Router()
 
 router.get('/', show_home)
 router.post('/add-exo', set_exo)
-//Travailler dessus une fois la session fini avec l'affichage d'objectif actuel
 
 router.get('/single/:id', show_exo)
 router.post('/add-objectif/:id', add_objectif)
