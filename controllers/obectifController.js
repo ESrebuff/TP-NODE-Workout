@@ -1,7 +1,4 @@
-import {
-    WorkoutObjectif
-}
-from '../models/WorkoutObjectif.js'
+import {WorkoutObjectif} from '../models/WorkoutObjectif.js'
 export const add_objectif = async (req, res) => {
     const user = req.session.user
     if (user) {
@@ -44,6 +41,6 @@ export const add_objectif = async (req, res) => {
                 res.redirect('/')
             })
         }
-        }
+        } else res.redirect('/')
     } else res.redirect('/')
 }
