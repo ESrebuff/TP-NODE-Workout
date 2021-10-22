@@ -14,10 +14,3 @@ const workoutObjectifSchema = new mongoose.Schema({
 })
 
 export const WorkoutObjectif = mongoose.model('WorkoutObjectif', workoutObjectifSchema)
-
-
-
-// maxWeigth
-// maxRep
-// obWeigth
-// obRep
