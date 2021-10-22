@@ -29,14 +29,6 @@ export const set_exo = async (req, res) => {
     } else res.redirect('/')
 }
 
-
-/*
-const user = req.session.user
-const exoId = req.params.id
-const IdFromExoAndUser = user._id + exoId
-*/
-
-
 export const show_exo = async (req, res) => {
     if (checkAuth(req, res)) {
         const exo = await WorkoutExos.findById(req.params.id)
